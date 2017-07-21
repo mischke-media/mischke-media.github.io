@@ -87,7 +87,9 @@ function checkWidthAndLoadAccordion() {
     });
 	}
 	else {
-	$( "#accordion" ).accordion("destroy");
+    if(typeof $( "#accordion" ) != "undefined"){
+      $( "#accordion" ).accordion("destroy");
+    }
 	}
   /*
    * hoverIntent | Copyright 2011 Brian Cherne
