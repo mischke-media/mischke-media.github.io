@@ -1,0 +1,274 @@
+<!doctype html>
+
+<!-- (HTML5 Reset 2011) -->
+
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if lt IE 9]>	<script src="assets/js/libs/html5shiv.min.js"></script>	<![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]>	<html class="no-js" lang="en">	<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+  <head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <!-- SEO -->
+  <title>About—Mischke Media</title>
+  <meta name="author" content="Aidan Mischke" />
+  <meta name="description" content="About page for Mischke Media portfolio" />
+
+  <!--  Mobile Viewport
+	http://j.mp/mobileviewport & http://davidbcalhoun.com/2010/viewport-metatag
+	device-width : Occupy full width of the screen in its current orientation
+	initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+	maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width (wrong for most sites)
+	-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- favicons and touch icons -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+
+  <!-- Google fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+
+  <!-- concatenate and minify for production -->
+  <link rel="stylesheet" href="assets/css/reset.css"/>
+  <link rel="stylesheet" href="assets/css/simple-style.css"/>
+  <link rel="stylesheet" media="screen and (min-width: 380px)" href="assets/css/complex-style.css" />
+  <!-- conditional stylesheet for IE8 which does not support media queries -->
+  <!--[if (IE 8)]>
+<link rel="stylesheet" href="assets/css/complex-style-for-IE8.css"/>
+<![endif]-->
+
+  <!-- Lea Verou's Prefix Free, lets you use un-prefixed properties in your CSS files -->
+  <script src="assets/js/libs/prefixfree.min.js"></script>
+
+  <!-- This is an un-minified, complete version of Modernizr. 
+		 Before you move to production, you should generate a custom build that only has the detects you need. -->
+  <script src="assets/js/libs/modernizr-2.7.1.dev.js"></script>
+
+  <!-- Start WOWSlider.com HEAD section -->
+  <link rel="stylesheet" type="text/css" href="engine1//style.css" media="screen" />
+  <script type="text/javascript" src="engine1//jquery.js"></script>
+  <!-- End WOWSlider.com HEAD section -->
+
+  <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+  <script src="assets/js/libs/jquery-1.11.1.min.js"></script>
+  <script src="assets/js/libs/jquery-ui.min.js"></script>
+  <script>
+  
+  /* (WebMacheter 2012) */
+  $(window).resize(function() {
+    checkWidthAndLoadAccordion();
+});
+
+$(document).ready(function() {
+  checkWidthAndLoadAccordion();
+});
+
+function checkWidthAndLoadAccordion() {
+    if($(window).width() < 1200) {
+    $( "#accordion" ).accordion({
+				heightStyle: "content",
+      event: "click hoverintent"
+    });
+	}
+	else {
+	$( "#accordion" ).accordion("destroy");
+	}
+  /*
+   * hoverIntent | Copyright 2011 Brian Cherne
+   * http://cherne.net/brian/resources/jquery.hoverIntent.html
+   * modified by the jQuery UI team
+   */
+  $.event.special.hoverintent = {
+    setup: function() {
+      $( this ).bind( "mouseover", jQuery.event.special.hoverintent.handler );
+    },
+    teardown: function() {
+      $( this ).unbind( "mouseover", jQuery.event.special.hoverintent.handler );
+    },
+    handler: function( event ) {
+      var currentX, currentY, timeout,
+        args = arguments,
+        target = $( event.target ),
+        previousX = event.pageX,
+        previousY = event.pageY;
+ 
+      function track( event ) {
+        currentX = event.pageX;
+        currentY = event.pageY;
+      };
+ 
+      function clear() {
+        target
+          .unbind( "mousemove", track )
+          .unbind( "mouseout", clear );
+        clearTimeout( timeout );
+      }
+ 
+      function handler() {
+        var prop,
+          orig = event;
+ 
+        if ( ( Math.abs( previousX - currentX ) +
+            Math.abs( previousY - currentY ) ) < 7 ) {
+          clear();
+ 
+          event = $.Event( "hoverintent" );
+          for ( prop in orig ) {
+            if ( !( prop in event ) ) {
+              event[ prop ] = orig[ prop ];
+            }
+          }
+          // Prevent accessing the original event since the new event
+          // is fired asynchronously and the old event is no longer
+          // usable (#6028)
+          delete event.originalEvent;
+ 
+          target.trigger( event );
+        } else {
+          previousX = currentX;
+          previousY = currentY;
+          timeout = setTimeout( handler, 100 );
+        }
+      }
+ 
+      timeout = setTimeout( handler, 100 );
+      target.bind({
+        mousemove: track,
+        mouseout: clear
+      });
+    }
+  };
+
+
+    
+}
+  </script>
+  </head>
+
+  <body>
+<h1 id='seo-h1'>About</h1>
+<div class="wrapper"> <a name="top"></a>
+    <header>
+    <div class='container'>
+        <div class="logo"> <a href="index.html"><img id="logo" src="img/logo.gif" title="Link to Home" alt="Mischke Media Logo"></a> </div>
+        <div class='nav parent-element'>
+        <div class='element'>
+            <nav>
+            <ul>
+                <li><a href="index.html" title="Main home page">Home</a></li>
+                <li><a href="portfolio.html" title="Collection of projects I've done">Portfolio</a></li>
+                <li class="current">About</li>
+                <li><a href="contact.html" title="Details, form, and map to help contact me">Contact</a></li>
+              </ul>
+          </nav>
+          </div>
+      </div>
+      </div>
+  </header>
+    <div>
+    <div id="slider"> </div>
+  </div>
+    <h1 id="title">Studies & Bio</h1>
+    <article>
+    <h2> Courses Studied: </h2>
+    <p class="margin-bottom">I've completed the following university courses (in no particular order): </p>
+    <div id="accordion-container">
+        <div id="accordion">
+        <h4>Computing Studies Major:</h4>
+        <ul>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-introduction-to-information-technology--cpt110-2014'>Introduction to Information Technology</a> </li>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-introduction-to-programming--cpt120-2014'>Introduction to Java Programming</a> </li>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-programming-1--cpt121-2014'>Java Programming 1</a> </li>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-database-concepts--cpt140-2014'>Database Concepts</a> </li>
+            <li><a href='http://www.open.edu.au/courses/it/rmit-university-data-communication-and-net-centric-computing--cpt250-2014'>Data Communication and Net-Centric Computing</a> </li>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-introduction-to-computer-systems--cpt160-2014'>Introduction to Computer Systems</a> </li>
+            <li><a href='http://www.open.edu.au/courses/it/rmit-university-programming-2-java--cpt221-2014'>Programming 2 (Java)</a> </li>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-programming-in-c--cpt220-2014'>Programming in C</a> </li>            
+			<li><a href='http://www.open.edu.au/courses/it/rmit-university-software-engineering-fundamentals--cpt230-2014'>Software Engineering Fundamentals</a> </li>
+            <li><a href='http://www.open.edu.au/courses/it/rmit-university-scripting-language-programming--cpt223-2014'>Scripting Language Programming</a> </li>
+            <li><a href='http://www.open.edu.au/courses/it/rmit-university-object-oriented-programming-in-c--cpt323-2014'>Object-Oriented Programming in C++</a> </li>
+			<li><a href='http://www.open.edu.au/courses/it/rmit-university-web-programming--cpt270-2014'>Web Programming</a> </li>
+            <li> <a href='http://www.open.edu.au/courses/it/rmit-university-web-development-technologies--cpt373-2014'>Web Development Technologies</a></li>
+			<li> <a href='http://www.open.edu.au/courses/it/rmit-university-professional-computing-practice--cpt310-2014'>Professional Computing Practice</a></li>
+			<li> <a href='http://www.open.edu.au/courses/it/rmit-university-document-markup-languages--cpt374-2014'>Document Markup Languages</a></li>			
+          </ul>
+        <h4>Internet Design Minor:</h4>
+        <ul>
+            <li><a href='http://www.open.edu.au/courses/arts/curtin-university-internet-design-introduction--dig251-2014'>Internet Design - Introduction</a> </li>
+            <li><a href='http://www.open.edu.au/courses/arts/curtin-university-internet-interactivity-design--dig252-2014'>Internet Interactivity Design</a></li>
+            <li> <a href='http://www.open.edu.au/courses/arts/curtin-university-internet-dynamic-environment-design--dig351-2014'>Internet Dynamic Environment Design</a></li>
+            <li> <a href='http://www.open.edu.au/courses/arts/curtin-university-internet-delivery-design--dig352-2014'>Internet Delivery Design</a></li>			
+          </ul>
+        <h4>Electives:</h4>
+        <ul class="uncheck">
+		    <li> <a href='http://www.open.edu.au/courses/arts/rmit-university-digital-imaging-with-photoshop--mmc140-2014'>Digital Imaging with Photoshop</a></li>
+            <li> <a href='https://www.open.edu.au/courses/arts/rmit-university-photographic-digital-imaging--mmv110-2013'>Photographic Digital Imaging</a></li>
+			<li> <a href='http://www.open.edu.au/courses/arts/rmit-university-web-animation-with-flash--mmc120-2014'>Web Animation with Flash</a></li>
+			<li> <a href='https://www.open.edu.au/courses/arts/macquarie-university-introductory-japanese-ii--jpe102-2013'>Introductory Japanese II</a></li>
+			<li> <a href='https://www.open.edu.au/courses/arts/macquarie-university-intermediate-japanese-i--jpe201-2013'>Intermediate Japanese I</a></li>
+          </ul>
+      </div>
+      </div>
+	<a class="large orange awesome" href='portfolio.html' title="Collection of projects I've done">View my Portfolio &raquo;</a> </article>
+    <aside id="bio-aside"> <a name="bio"></a>
+    <h2 id="bio" title="Brief Biography - a little about me">Brief Bio</h2>
+	<p>2015 – Finished my university studies in March and pursued Software Development roles in Brisbane, Queensland.</p>
+    <br>
+	<p>2014 – Moved back to Ipswich in October.</p>
+    <br>
+    <p>2013 – Started second year of uni and moved to the Airlie Beach in the Whitsundays, Queensland for a change of scenery. Started working as a bar hand at weddings.</p>
+    <br>
+    <p>2012 – Started studying through <a href='http://www.open.edu.au/' title="Link to Open Universities Australia">OUA</a> (<a href='http://www.rmit.edu.au/' title="Link to Royal Melbourne Institute of Technology">RMIT</a> & <a href='http://www.curtin.edu.au/' title="Link to Curtin University">Curtin</a>) doing a Bachelor of Technology: Computing Studies (Programming). </p>
+    <br>
+    <p>2011 – Continued working until the end of the year and developed an interest in building and tinkering with computer systems which extended to a desire to learn software development.</p>
+    <br>
+    <p>2010 – I graduated with a Bachelor of Arts: Japanese double Major and Communication and Cultural Studies Minor. I started working as a Technical Officer for Department of Prime Industries' Insect & Plant Pathology Collections.</p>
+    <br>
+    <p>2008 – During second year uni summer break, I revisited Japan and worked on a ski lift in Hakuba, Nagano for two months and became proficient at snowboarding. </p>
+    <br>
+    <p>2007 – Started studying through UQ St. Lucia doing a Bachelor of Arts: Japanese. </p>
+    <br>
+    <p>2005 – During Secondary School year 11, I travelled to Japan: Tokyo, and Kyoto. </p>
+    <br>
+    <p>1989 – Born in Ipswich, Queensland .</p>
+    <a class="backToTop" href="#top" title="Go back to the start">Back to Top</a> </aside>
+    <footer>
+    <nav>
+        <ul>
+        <li><a href="index.html" title="Main home page">Home</a></li>
+        <li><a href="portfolio.html" title="Collection of projects I've done">Portfolio</a></li>
+        <li class="current">About</li>
+        <li><a href="contact.html" title="Details, form, and map to help contact me">Contact</a></li>
+      </ul>
+      </nav>
+    <div>
+        <div>
+        <p><small>&copy; Aidan Mischke 2015. All Rights Reserved.</small></p>
+        <p><small>Last updated: 10 May 2015.</small></p>
+      </div>
+      </div>
+  </footer>
+  </div>
+<!-- end wrapper --> 
+
+<!-- this is where we put our custom functions --> 
+<!-- don't forget to concatenate and minify if needed --> 
+<script src="assets/js/functions.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+
+<!-- (HTML5 Reset 2011) -->
+
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if lt IE 9]>	<script src="assets/js/libs/html5shiv.min.js"></script>	<![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]>	<html class="no-js" lang="en">	<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+<head>
+<meta charset="utf-8">
+
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<!-- SEO -->
+<title>Contact—Mischke Media</title>
+<meta name="author" content="Aidan Mischke" />
+<meta name="description" content="Contact page for Mischke Media portfolio" />
+
+<!--  Mobile Viewport
+	http://j.mp/mobileviewport & http://davidbcalhoun.com/2010/viewport-metatag
+	device-width : Occupy full width of the screen in its current orientation
+	initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+	maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width (wrong for most sites)
+	-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- favicons and touch icons -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+
+<!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+
+<!-- concatenate and minify for production -->
+<link rel="stylesheet" href="assets/css/reset.css"/>
+<link rel="stylesheet" href="assets/css/simple-style.css"/>
+<link rel="stylesheet" media="screen and (min-width: 380px)" href="assets/css/complex-style.css" />
+
+<!-- Styling for contact page -->
+<link rel="stylesheet" href="assets/css/simple-contact.css" />
+<link rel="stylesheet" media="screen and (min-width: 650px)" href="assets/css/complex-contact.css" />
+<!-- conditional stylesheet for IE8 which does not support media queries -->
+<!--[if (IE 8)]>
+<link rel="stylesheet" href="assets/css/complex-style-for-IE8.css"/>
+<link rel="stylesheet" href="assets/css/complex-contact-for-IE8.css"/>
+<![endif]-->
+
+<!-- Lea Verou's Prefix Free, lets you use un-prefixed properties in your CSS files -->
+<script src="assets/js/libs/prefixfree.min.js"></script>
+
+<!-- This is an un-minified, complete version of Modernizr. 
+		 Before you move to production, you should generate a custom build that only has the detects you need. -->
+<script src="assets/js/libs/modernizr-2.7.1.dev.js"></script>
+
+<!-- (Chamling 2014) -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#submit_btn").click(function() { 
+       
+	    var proceed = true;
+        //simple validation at client's end
+        //loop through each field and we simply change border color to red for invalid fields		
+		$("#contact_form input[required=true], #contact_form textarea[required=true]").each(function(){
+			$(this).css('border-color',''); 
+			if(!$.trim($(this).val())){ //if this field is empty 
+				$(this).css('border-color','red'); //change border color to red   
+				proceed = false; //set do not proceed flag
+			}
+			//check invalid email
+			var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+			if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
+				$(this).css('border-color','red'); //change border color to red   
+				proceed = false; //set do not proceed flag				
+			}	
+		});
+       
+        if(proceed) //everything looks good! proceed...
+        {
+			//get input field values data to be sent to server
+            post_data = {
+				'user_name'		: $('input[name=name]').val(), 
+				'user_email'	: $('input[name=email]').val(), 
+				'msg'			: $('textarea[name=message]').val()
+			};
+            
+            //Ajax post data to server
+            $.post('contact_me.php', post_data, function(response){  
+				if(response.type == 'error'){ //load json data from server and output message     
+					output = '<div class="error">'+response.text+'</div>';
+				}else{
+				    output = '<div class="success">'+response.text+'</div>';
+					//reset values in all input fields
+					$("#contact_form  input[required=true], #contact_form textarea[required=true]").val(''); 
+					$("#contact_form #contact_body").slideUp(); //hide form after success
+				}
+				$("#contact_form #contact_results").hide().html(output).slideDown();
+            }, 'json');
+        }
+    });
+    
+    //reset previously set border colors and hide all message on .keyup()
+    $("#contact_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
+        $(this).css('border-color',''); 
+        $("#result").slideUp();
+    });
+});
+</script>
+</head>
+
+<body>
+<h1 id='seo-h1'>Contact</h1>
+<div class="wrapper">
+  <header>
+    <div class='container'>
+      <div class="logo"> <a href="index.html"><img id="logo" src="img/logo.gif" title="Link to Home" alt="Mischke Media Logo"></a> </div>
+      <div class='nav parent-element'>
+        <div class='element'>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="about.html">About</a></li>
+              <li class="current">Contact</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <button id="toggle-form" class="large blue awesome">Toggle Form</button>
+
+  <div id="contact-container">
+
+    <div class="grid-container">
+      <div class="grid-70 center" id="contact-us">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:mischkemedia@gmail.com" target="_top">mischkemedia@gmail.com</a></p>
+        
+        <fieldset id="contact_form">
+          <legend>Message Me</legend>
+          <div id="contact_results"></div>
+          <div id="contact_body">
+            <label><span>Name</span>
+              <input type="text" name="name" id="name" required class="input-field" placeholder="Name"/>
+            </label>
+            <label><span>Email</span>
+              <input type="email" name="email" required class="input-field" placeholder="Email"/>
+            </label>
+            <label for="field5"><span>Message</span>
+              <textarea name="message" id="message" required class="textarea-field" required placeholder="Message"></textarea>
+            </label>
+            <input type="submit" class="submit_btn large orange awesome" id="submit_btn" value="Submit" />
+          </div>
+        </fieldset>
+      </div>
+      <!--end content-block--> 
+    </div>
+    <!--end grid-container--> 
+  </div>
+  <!--end container-->
+  <iframe id="gmap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d453374.1108259239!2d153.00285945000002!3d-27.407389899999988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b91579aac93d233%3A0x402a35af3deaf40!2sBrisbane+QLD!5e0!3m2!1sen!2sau!4v1431210827667" width="600" height="450" frameborder="0" style="border:0"></iframe>
+<!-- footer is not required on this page -->
+</div>
+<!-- end wrapper --> 
+
+<!-- this is where we put our custom functions --> 
+<!-- don't forget to concatenate and minify if needed --> 
+<script src="assets/js/functions.js"></script> 
+
+<!-- My JavaScript --> 
+<!-- Contact page's interactive Google Map has Toggle Map button
+to hide the content area. --> 
+<!--(Hide and Show 2014; 
+ID Selector 2014; is page 2014)--> 
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#toggle-form").click(function(){
+    $("#contact-container").toggle();
+  });
+});</script>
+</body>
+</html>

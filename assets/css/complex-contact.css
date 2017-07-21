@@ -1,0 +1,57 @@
+ @media screen and (min-width: 650px) {
+/* Contact page */
+/* fixed logo dimensions so it does not overlap behind the map*/
+#logo {
+	width: 300px;
+	height: 191px;
+}
+/* Prevent scrolling of contact page */
+html {
+	overflow-y: hidden;
+}
+/* Google Maps background on Contact page */
+/* (FUN WITH GOOGLE MAPS 2012; Hide and Show 2014) */
+#gmap {
+	height: 100%;
+	left: 0;
+	position: fixed !important;
+	top: 220px;
+	width: 100%;
+	z-index: 1;
+}
+#contact-container {
+	margin: 0 auto;
+	margin-top: 6%;
+	overflow: visible !important;
+	padding: 0px 40px 40px 40px;
+	position: relative;
+	width: 450px;
+	z-index: 2;
+}
+#contact-us {
+	margin-top: 2%;
+	float: none;
+	padding: 1%;
+	margin-bottom: 1%;
+	background: #FFF;
+}
+#contact-us p {
+	margin-top: 3%;
+	margin-left: 5%;
+}
+#contact-us h2 {
+	padding: 0%;
+	margin-left: 2%;
+}
+#toggle-form {
+	display: inline;
+	position: relative;
+	top: -35px;
+	left: -25px;
+}
+/* Contact Form */
+/* (Chamling 2014) */
+#contact_form {
+	margin-left: auto;
+}
+}

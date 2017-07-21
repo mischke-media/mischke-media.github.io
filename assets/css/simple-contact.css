@@ -1,0 +1,124 @@
+/* Contact page */
+/* (Chamling 2014) */
+#contact_form {
+	width: 90%;
+	padding: 20px 20px 0px 20px;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	font-size: 90%;
+	font-weight: bold;
+	background: #FAFAFA;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 5%;
+	margin-bottom: 2%;
+}
+#contact_form legend {
+	font-size: 15px;
+}
+#contact_form label {
+	display: block;
+	margin-bottom: 5px;
+}
+#contact_form label span {
+	float: left;
+	width: 100px;
+}
+#contact_form .input-field {
+	font-size: 80%;
+	height: 25px;
+	border: 1px solid #DBDBDB;
+	border-radius: 3px;
+	padding-left: 4px;
+	width: 230px;
+}
+#contact_form textarea {
+	font-size: 80%;
+	border: 1px solid #DBDBDB;
+	border-radius: 3px;
+	padding-left: 4px;
+	height: 100px;
+	width: 230px;
+}
+.success {
+	background: #00b74a;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #B9ECCE;
+	border-radius: 5px;
+	font-weight: normal;
+}
+span.required {
+	color: red;
+}
+.error {
+	background: #FFDFDF;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #FFCACA;
+	border-radius: 5px;
+	font-weight: normal;
+}
+#contact_form .submit_btn {
+	display: block;
+	margin: 0 auto 15px;
+}
+iframe {
+	display: block;
+	margin: 0 auto;
+}
+/* Google Maps background on Contact page */
+/* (FUN WITH GOOGLE MAPS 2012; Hide and Show 2014) */
+#gmap {
+	height: 100%;
+	width: 100%;
+	width: 320px;
+	height: 400px;
+	z-index: 1;
+}
+#contact-container {
+	margin: 0 auto;
+	padding: 5px;
+	line-height: 175%;
+	width: 300px;
+	z-index: 2;
+}
+#contact-us {
+	margin-top: 2%;
+	float: none;
+	padding: 1%;
+	margin-bottom: 1%;
+	background: #FFF;
+}
+#contact-us p {
+	margin-top: 3%;
+	margin-left: 5%;
+}
+#contact-us h2 {
+	padding: 0%;
+	margin-left: 2%;
+}
+#toggle-form {
+	display: none;
+}
+/* Contact Form */
+/* (Chamling 2014) */
+#contact_form {
+	margin-left: 0;
+	width: 300px;
+}
+.backToTop {
+	margin-top: 5%;
+	text-align: center;
+	display: block;
+}
+/* don't change colour after clicking */
+.backToTop:visited {
+	color: #ff9f00;
+}
+#bio-aside {
+	margin-top: 20%;
+}
+.margin-bottom {
+	margin-bottom: 5%;
+}
