@@ -87,7 +87,8 @@ function checkWidthAndLoadAccordion() {
     });
 	}
 	else {
-    if(typeof $( "#accordion" ) != "undefined"){
+    if($( "#accordion" ).accordion().hasClass("ui-accordion") 
+			&& $( "#accordion" ).accordion().hasClass("ui-widget")){
       $( "#accordion" ).accordion("destroy");
     }
 	}
