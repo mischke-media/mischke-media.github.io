@@ -21,7 +21,7 @@ html {
 }
 #contact-container {
 	margin: 0 auto;
-	margin-top: 6%;
+	margin-top: 21%;
 	overflow: visible !important;
 	padding: 0px 40px 40px 40px;
 	position: relative;
@@ -38,6 +38,7 @@ html {
 #contact-us p {
 	margin-top: 3%;
 	margin-left: 5%;
+	margin-bottom: 3%;
 }
 #contact-us h2 {
 	padding: 0%;
@@ -48,10 +49,16 @@ html {
 	position: relative;
 	top: -35px;
 	left: -25px;
+	margin: 3% 1% 1% 1%;
 }
-/* Contact Form */
-/* (Chamling 2014) */
-#contact_form {
-	margin-left: auto;
+}
+@media screen and (min-width: 650px) and (max-width: 1199px) {
+	 #contact-container {
+    margin-top: 21%;
+}
+}
+@media screen and (min-width: 1200px) {
+	 #contact-container {
+    margin-top: 11%;
 }
 }

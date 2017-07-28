@@ -67,58 +67,6 @@
 
 <!-- (Chamling 2014) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#submit_btn").click(function() { 
-       
-	    var proceed = true;
-        //simple validation at client's end
-        //loop through each field and we simply change border color to red for invalid fields		
-		$("#contact_form input[required=true], #contact_form textarea[required=true]").each(function(){
-			$(this).css('border-color',''); 
-			if(!$.trim($(this).val())){ //if this field is empty 
-				$(this).css('border-color','red'); //change border color to red   
-				proceed = false; //set do not proceed flag
-			}
-			//check invalid email
-			var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
-			if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
-				$(this).css('border-color','red'); //change border color to red   
-				proceed = false; //set do not proceed flag				
-			}	
-		});
-       
-        if(proceed) //everything looks good! proceed...
-        {
-			//get input field values data to be sent to server
-            post_data = {
-				'user_name'		: $('input[name=name]').val(), 
-				'user_email'	: $('input[name=email]').val(), 
-				'msg'			: $('textarea[name=message]').val()
-			};
-            
-            //Ajax post data to server
-            $.post('contact_me.php', post_data, function(response){  
-				if(response.type == 'error'){ //load json data from server and output message     
-					output = '<div class="error">'+response.text+'</div>';
-				}else{
-				    output = '<div class="success">'+response.text+'</div>';
-					//reset values in all input fields
-					$("#contact_form  input[required=true], #contact_form textarea[required=true]").val(''); 
-					$("#contact_form #contact_body").slideUp(); //hide form after success
-				}
-				$("#contact_form #contact_results").hide().html(output).slideDown();
-            }, 'json');
-        }
-    });
-    
-    //reset previously set border colors and hide all message on .keyup()
-    $("#contact_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
-        $(this).css('border-color',''); 
-        $("#result").slideUp();
-    });
-});
-</script>
 </head>
 
 <body>
@@ -141,32 +89,13 @@ $(document).ready(function() {
       </div>
     </div>
   </header>
-
   <button id="toggle-form" class="large blue awesome">Toggle Form</button>
-
   <div id="contact-container">
 
     <div class="grid-container">
-      <div class="grid-70 center" id="contact-us">
+      <div class="grid-70" id="contact-us">
         <h2>Contact</h2>
         <p>Email: <a href="mailto:mischkemedia@gmail.com" target="_top">mischkemedia@gmail.com</a></p>
-        
-        <fieldset id="contact_form">
-          <legend>Message Me</legend>
-          <div id="contact_results"></div>
-          <div id="contact_body">
-            <label><span>Name</span>
-              <input type="text" name="name" id="name" required class="input-field" placeholder="Name"/>
-            </label>
-            <label><span>Email</span>
-              <input type="email" name="email" required class="input-field" placeholder="Email"/>
-            </label>
-            <label for="field5"><span>Message</span>
-              <textarea name="message" id="message" required class="textarea-field" required placeholder="Message"></textarea>
-            </label>
-            <input type="submit" class="submit_btn large orange awesome" id="submit_btn" value="Submit" />
-          </div>
-        </fieldset>
       </div>
       <!--end content-block--> 
     </div>
