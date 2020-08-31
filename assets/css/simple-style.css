@@ -270,9 +270,10 @@ div.portfolio article {
 .p-item {
 	clear: both;
 	padding: 1%;
+	margin-bottom: 5%;
 }
 .p-desc {
-	margin-bottom: 10%;
+	margin-bottom: 5%;
 }
 h1 {
 	padding: 1% 0% 1% 1.5%;
